@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="89">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>BootloaderAPI.h</itemPath>
+      <itemPath>BootloaderDFU.h</itemPath>
+      <itemPath>Descriptors.h</itemPath>
+      <itemPath>Config/AppConfig.h</itemPath>
+      <itemPath>Config/LUFAConfig.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>BootloaderAPI.c</itemPath>
+      <itemPath>BootloaderDFU.c</itemPath>
+      <itemPath>Descriptors.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="AssemblyFiles"
+                   displayName="Assembly Files"
+                   projectFiles="true">
+      <itemPath>BootloaderAPITable.S</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <incDir>
+            <pElem>../../lufa</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>F_CPU=8000000UL</Elem>
+            <Elem>__AVR_ATmega32U2__</Elem>
+          </preprocessorList>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>../../lufa</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>F_CPU=8000000UL</Elem>
+            <Elem>__AVR_ATmega32U2__</Elem>
+          </preprocessorList>
+        </ccTool>
+      </compileType>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>../../lufa</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>F_CPU=8000000UL</Elem>
+            <Elem>__AVR_ATmega32U2__</Elem>
+          </preprocessorList>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>../../lufa</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>F_CPU=8000000UL</Elem>
+            <Elem>__AVR_ATmega32U2__</Elem>
+          </preprocessorList>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+    </conf>
+  </confs>
+</configurationDescriptor>
