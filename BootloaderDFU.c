@@ -185,6 +185,10 @@ static void SetupHardware(void)
 	/* Initialize the USB and other board hardware drivers */
 	USB_Init();
 	LEDs_Init();
+        
+        // Enable faster charge
+        DDRC |= 0b00010000;
+        PORTC &= ~0b00010000;
 
 	/* Bootloader active LED toggle timer initialization */
 	TIMSK1 = (1 << TOIE1);
