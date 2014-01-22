@@ -54,6 +54,7 @@
           </incDir>
           <preprocessorList>
             <Elem>F_CPU=8000000UL</Elem>
+            <Elem>USB_CAN_BE_DEVICE</Elem>
             <Elem>__AVR_ATmega32U2__</Elem>
           </preprocessorList>
         </cTool>
@@ -63,6 +64,7 @@
           </incDir>
           <preprocessorList>
             <Elem>F_CPU=8000000UL</Elem>
+            <Elem>USB_CAN_BE_DEVICE</Elem>
             <Elem>__AVR_ATmega32U2__</Elem>
           </preprocessorList>
         </ccTool>
@@ -110,6 +112,7 @@
           </incDir>
           <preprocessorList>
             <Elem>F_CPU=8000000UL</Elem>
+            <Elem>USB_CAN_BE_DEVICE</Elem>
             <Elem>__AVR_ATmega32U2__</Elem>
           </preprocessorList>
         </cTool>
@@ -120,6 +123,7 @@
           </incDir>
           <preprocessorList>
             <Elem>F_CPU=8000000UL</Elem>
+            <Elem>USB_CAN_BE_DEVICE</Elem>
             <Elem>__AVR_ATmega32U2__</Elem>
           </preprocessorList>
         </ccTool>

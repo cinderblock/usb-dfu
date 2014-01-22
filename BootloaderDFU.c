@@ -187,8 +187,8 @@ static void SetupHardware(void)
 	LEDs_Init();
         
         // Enable faster charge
-        DDRC |= 0b00010000;
-        PORTC &= ~0b00010000;
+        DDRD  |=  0b01000000;
+        PORTD &= ~0b01000000;
 
 	/* Bootloader active LED toggle timer initialization */
 	TIMSK1 = (1 << TOIE1);

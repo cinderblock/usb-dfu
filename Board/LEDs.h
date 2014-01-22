@@ -91,25 +91,25 @@
 
 			static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask)
 			{
-             PORTC |= LEDMask;
+             PORTC |= LEDS_LED1;
 			}
 
 			static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask)
 			{
-             PORTC &= ~LEDMask;
+             PORTC &= ~LEDS_LED1;
 			}
 
-			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
-			{
-				// Add code to set the Leds in the given LEDMask to the status given in ActiveMask here
-             PORTC |= LEDMask & ActiveMask;
-             PORTC &= ~(LEDMask & ~ActiveMask);
-			}
+//			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
+//			{
+//				// Add code to set the Leds in the given LEDMask to the status given in ActiveMask here
+//             PORTC |= LEDMask & ActiveMask & LEDS_LED1;
+//             PORTC &= ~(LEDMask & ~ActiveMask & LEDS_LED1);
+//			}
 
 			static inline void LEDs_SetAllLEDs(const uint8_t LEDMask)
 			{
 				// TODO: Add code to turn on only LEDs given in the LEDMask mask here, all others off
-             LEDs_ChangeLEDs(LEDMask, LEDS_ALL_LEDS);
+                         LEDs_TurnOnLEDs(LEDMask);
 			}
 
 			static inline void LEDs_ToggleLEDs(const uint8_t LEDMask)
@@ -120,7 +120,7 @@
 			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
 			static inline uint8_t LEDs_GetLEDs(void)
 			{
-             return PINC;
+             return PINC & LEDS_LED1;
 			}
 		#endif
 
