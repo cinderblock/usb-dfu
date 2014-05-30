@@ -6,10 +6,7 @@
                    projectFiles="true">
       <itemPath>BootloaderAPITable.S</itemPath>
     </logicalFolder>
-    <logicalFolder name="f1"
-                   displayName="Board Files"
-                   projectFiles="true"
-                   kind="ROOT">
+    <logicalFolder name="f1" displayName="Board Files" projectFiles="true">
       <itemPath>Board/Board.h</itemPath>
       <itemPath>Board/Buttons.h</itemPath>
       <itemPath>Board/Dataflash.h</itemPath>
