@@ -11,10 +11,10 @@
 
 # Run "make help" for target help.
 
-MCU          = atmega32u2
+MCU          = atmega32u4
 ARCH         = AVR8
 BOARD        = BOARD_USER
-F_CPU        = 8000000
+F_CPU        = 16000000
 F_USB        = $(F_CPU)
 OPTIMIZATION = s
 TARGET       = BootloaderDFU

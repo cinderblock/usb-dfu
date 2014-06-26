@@ -53,7 +53,7 @@
 		#endif
 
 	/* Preprocessor Checks: */
-		#if !defined(__INCLUDE_FROM_LEDS_H)
+		#if defined(__INCLUDE_FROM_LEDS_H)
 			#error Do not include this file directly. Include LUFA/Drivers/Board/LEDS.h instead.
 		#endif
 
@@ -81,22 +81,22 @@
 		#if !defined(__DOXYGEN__)
 			static inline void LEDs_Init(void)
 			{
-             DDRC |= LEDS_LED1;
+//             DDRC |= LEDS_LED1;
 			}
 
 			static inline void LEDs_Disable(void)
 			{
-             DDRC &= ~LEDS_LED1;
+//             DDRC &= ~LEDS_LED1;
 			}
 
 			static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask)
 			{
-             PORTC |= LEDS_LED1;
+//             PORTC |= LEDS_LED1;
 			}
 
 			static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask)
 			{
-             PORTC &= ~LEDS_LED1;
+//             PORTC &= ~LEDS_LED1;
 			}
 
 //			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
@@ -109,18 +109,18 @@
 			static inline void LEDs_SetAllLEDs(const uint8_t LEDMask)
 			{
 				// TODO: Add code to turn on only LEDs given in the LEDMask mask here, all others off
-                         LEDs_TurnOnLEDs(LEDMask);
+//                         LEDs_TurnOnLEDs(LEDMask);
 			}
 
 			static inline void LEDs_ToggleLEDs(const uint8_t LEDMask)
 			{
-             PINC = LEDMask;
+//             PINC = LEDMask;
 			}
 
 			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
 			static inline uint8_t LEDs_GetLEDs(void)
 			{
-             return PINC & LEDS_LED1;
+//             return PINC & LEDS_LED1;
 			}
 		#endif
 
