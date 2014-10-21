@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="90">
+<configurationDescriptor version="95">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="AssemblyFiles"
                    displayName="Assembly Files"
@@ -47,22 +47,22 @@
       <compileType>
         <cTool>
           <incDir>
-            <pElem>../../lufa</pElem>
+            <pElem>../lufa</pElem>
           </incDir>
           <preprocessorList>
             <Elem>F_CPU=8000000UL</Elem>
             <Elem>USB_CAN_BE_DEVICE</Elem>
-            <Elem>__AVR_ATmega32U2__</Elem>
+            <Elem>__AVR_ATmega32U4__</Elem>
           </preprocessorList>
         </cTool>
         <ccTool>
           <incDir>
-            <pElem>../../lufa</pElem>
+            <pElem>../lufa</pElem>
           </incDir>
           <preprocessorList>
             <Elem>F_CPU=8000000UL</Elem>
             <Elem>USB_CAN_BE_DEVICE</Elem>
-            <Elem>__AVR_ATmega32U2__</Elem>
+            <Elem>__AVR_ATmega32U4__</Elem>
           </preprocessorList>
         </ccTool>
       </compileType>
@@ -93,53 +93,6 @@
       <item path="Descriptors.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Descriptors.h" ex="false" tool="3" flavor2="0">
-      </item>
-    </conf>
-    <conf name="Release" type="1">
-      <toolsSet>
-        <compilerSet>default</compilerSet>
-        <dependencyChecking>true</dependencyChecking>
-        <rebuildPropChanged>false</rebuildPropChanged>
-      </toolsSet>
-      <compileType>
-        <cTool>
-          <developmentMode>5</developmentMode>
-          <incDir>
-            <pElem>../../lufa</pElem>
-          </incDir>
-          <preprocessorList>
-            <Elem>F_CPU=8000000UL</Elem>
-            <Elem>USB_CAN_BE_DEVICE</Elem>
-            <Elem>__AVR_ATmega32U2__</Elem>
-          </preprocessorList>
-        </cTool>
-        <ccTool>
-          <developmentMode>5</developmentMode>
-          <incDir>
-            <pElem>../../lufa</pElem>
-          </incDir>
-          <preprocessorList>
-            <Elem>F_CPU=8000000UL</Elem>
-            <Elem>USB_CAN_BE_DEVICE</Elem>
-            <Elem>__AVR_ATmega32U2__</Elem>
-          </preprocessorList>
-        </ccTool>
-        <fortranCompilerTool>
-          <developmentMode>5</developmentMode>
-        </fortranCompilerTool>
-        <asmTool>
-          <developmentMode>5</developmentMode>
-        </asmTool>
-      </compileType>
-      <item path="Board/Board.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Board/Buttons.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Board/Dataflash.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Board/Joystick.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Board/LEDs.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

@@ -60,7 +60,7 @@
 	/* Public Interface - May be used in end-application: */
 		/* Macros: */
 			/** LED mask for the first LED on the board. */
-			#define LEDS_LED1        0b00010000
+			#define LEDS_LED1        0b00000010
 
 			/** LED mask for the second LED on the board. */
 			#define LEDS_LED2        0
@@ -81,22 +81,24 @@
 		#if !defined(__DOXYGEN__)
 			static inline void LEDs_Init(void)
 			{
-//             DDRC |= LEDS_LED1;
+                            DDRD  |=  0b10000000;
+                            PORTD &= ~0b10000000;
+             DDRB |= LEDS_ALL_LEDS;
 			}
 
 			static inline void LEDs_Disable(void)
 			{
-//             DDRC &= ~LEDS_LED1;
+             DDRB &= ~LEDS_ALL_LEDS;
 			}
 
 			static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask)
 			{
-//             PORTC |= LEDS_LED1;
+             PORTB |= LEDS_ALL_LEDS;
 			}
 
 			static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask)
 			{
-//             PORTC &= ~LEDS_LED1;
+             PORTB &= ~LEDS_ALL_LEDS;
 			}
 
 //			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
