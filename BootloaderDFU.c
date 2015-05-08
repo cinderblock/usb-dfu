@@ -172,6 +172,8 @@ void Application_Jump_Check(void)
 	}
 }
 
+static uint8_t onTime = 0;
+
 /** Main program entry point. This routine configures the hardware required by the bootloader, then continuously
  *  runs the bootloader processing routine until instructed to soft-exit, or hard-reset via the watchdog to start
  *  the loaded application code.
@@ -189,7 +191,11 @@ int main(void)
 
 	/* Run the USB management task while the bootloader is supposed to be running */
 	while (RunBootloader || WaitForExit)
+	{
+		if (onTime > 10 && USB_DeviceState == DEVICE_STATE_Unattached)
+		 break;
 	  USB_USBTask();
+	}
 
 	/* Reset configured hardware back to their original states for the user application */
 	ResetHardware();
@@ -241,6 +247,7 @@ static void ResetHardware(void)
 ISR(TIMER1_OVF_vect, ISR_BLOCK)
 {
 	LEDs_ToggleLEDs(LEDS_LED1 | LEDS_LED2);
+	if (onTime != 0xff) onTime++;
 }
 
 /** Event handler for the USB_ControlRequest event. This is used to catch and process control requests sent to
