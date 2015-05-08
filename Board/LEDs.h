@@ -89,7 +89,7 @@
 			static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask)
 			{
 				if (LEDMask & LEDS_LED1)
-						PORTD |=  LEDS_LED1;
+						PORTB |=  LEDS_LED1;
 				if (LEDMask & LEDS_LED2)
 						PORTD |=  LEDS_LED2;
 			}
@@ -97,7 +97,7 @@
 			static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask)
 			{
 				if (LEDMask & LEDS_LED1)
-						PORTD &= ~LEDS_LED1;
+						PORTB &= ~LEDS_LED1;
 				if (LEDMask & LEDS_LED2)
 						PORTD &= ~LEDS_LED2;
 			}
