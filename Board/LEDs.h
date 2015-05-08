@@ -129,11 +129,11 @@
 						PIND  =  LEDS_LED2;
 			}
 
-			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
-			static inline uint8_t LEDs_GetLEDs(void)
-			{
-//             return PINC & LEDS_LED1;
-			}
+// 			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
+// 			static inline uint8_t LEDs_GetLEDs(void)
+// 			{
+// //             return PINC & LEDS_LED1;
+// 			}
 		#endif
 
 	/* Disable C linkage for C++ Compilers: */
