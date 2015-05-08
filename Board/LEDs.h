@@ -53,17 +53,17 @@
 		#endif
 
 	/* Preprocessor Checks: */
-		#if defined(__INCLUDE_FROM_LEDS_H)
+		#if !defined(__INCLUDE_FROM_LEDS_H)
 			#error Do not include this file directly. Include LUFA/Drivers/Board/LEDS.h instead.
 		#endif
 
 	/* Public Interface - May be used in end-application: */
 		/* Macros: */
 			/** LED mask for the first LED on the board. */
-			#define LEDS_LED1        0b00000010
+			#define LEDS_LED1        0b00000001
 
 			/** LED mask for the second LED on the board. */
-			#define LEDS_LED2        0
+			#define LEDS_LED2        0b00100000
 
 			/** LED mask for the third LED on the board. */
 			#define LEDS_LED3        0
@@ -81,24 +81,32 @@
 		#if !defined(__DOXYGEN__)
 			static inline void LEDs_Init(void)
 			{
-                            DDRD  |=  0b10000000;
-                            PORTD &= ~0b10000000;
-             DDRB |= LEDS_ALL_LEDS;
-			}
-
-			static inline void LEDs_Disable(void)
-			{
-             DDRB &= ~LEDS_ALL_LEDS;
+						DDRB  |=  LEDS_LED1;
+            DDRD  |=  LEDS_LED2;
+            PORTD &= ~LEDS_LED2;
 			}
 
 			static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask)
 			{
-             PORTB |= LEDS_ALL_LEDS;
+				if (LEDMask & LEDS_LED1)
+						PORTD |=  LEDS_LED1;
+				if (LEDMask & LEDS_LED2)
+						PORTD |=  LEDS_LED2;
 			}
 
 			static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask)
 			{
-             PORTB &= ~LEDS_ALL_LEDS;
+				if (LEDMask & LEDS_LED1)
+						PORTD &= ~LEDS_LED1;
+				if (LEDMask & LEDS_LED2)
+						PORTD &= ~LEDS_LED2;
+			}
+
+			static inline void LEDs_Disable(void)
+			{
+						LEDs_TurnOffLEDs(LEDS_ALL_LEDS);
+						DDRB  &= ~LEDS_LED1;
+            DDRD  &= ~LEDS_LED2;
 			}
 
 //			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
@@ -110,13 +118,15 @@
 
 			static inline void LEDs_SetAllLEDs(const uint8_t LEDMask)
 			{
-				// TODO: Add code to turn on only LEDs given in the LEDMask mask here, all others off
-//                         LEDs_TurnOnLEDs(LEDMask);
+        	LEDs_TurnOnLEDs(LEDMask);
 			}
 
 			static inline void LEDs_ToggleLEDs(const uint8_t LEDMask)
 			{
-//             PINC = LEDMask;
+				if (LEDMask & LEDS_LED1)
+            PINB  =  LEDS_LED1;
+				if (LEDMask & LEDS_LED2)
+						PIND  =  LEDS_LED2;
 			}
 
 			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
@@ -132,4 +142,3 @@
 		#endif
 
 #endif
-

@@ -19,11 +19,12 @@ F_USB        = $(F_CPU)
 OPTIMIZATION = s
 TARGET       = BootloaderDFU
 SRC          = $(TARGET).c Descriptors.c BootloaderAPI.c BootloaderAPITable.S $(LUFA_SRC_USB)
-LUFA_PATH    = ../LUFA/LUFA
 CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/ -DBOOT_START_ADDR=$(BOOT_START_OFFSET)
 LD_FLAGS     = -Wl,--section-start=.text=$(BOOT_START_OFFSET) $(BOOT_API_LD_FLAGS)
 
 AVRDUDE_PROGRAMMER = usbtiny
+
+include local.mk
 
 # Flash size and bootloader section sizes of the target, in KB. These must
 # match the target's total FLASH size and the bootloader size set in the
@@ -45,7 +46,7 @@ BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_jumptable,   Boot
 BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_signatures,  BootloaderAPI_Signatures,  8)
 
 # Default target
-all:
+all: avrdude
 
 # Include LUFA build script makefiles
 include $(LUFA_PATH)/Build/lufa_core.mk
