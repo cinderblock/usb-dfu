@@ -192,7 +192,7 @@ int main(void)
 	/* Run the USB management task while the bootloader is supposed to be running */
 	while (RunBootloader || WaitForExit)
 	{
-		if (onTime > 10 && USB_DeviceState == DEVICE_STATE_Unattached)
+		if (onTime > 10 && USB_DeviceState != DEVICE_STATE_Configured)
 		 break;
 	  USB_USBTask();
 	}
