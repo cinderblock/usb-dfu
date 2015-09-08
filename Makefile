@@ -24,6 +24,8 @@ LD_FLAGS     = -Wl,--section-start=.text=$(BOOT_START_OFFSET) $(BOOT_API_LD_FLAG
 
 AVRDUDE_PROGRAMMER = usbtiny
 
+AVRDUDE_FLAGS = -B.1
+
 include local.mk
 
 # Flash size and bootloader section sizes of the target, in KB. These must
