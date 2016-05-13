@@ -60,10 +60,10 @@
 	/* Public Interface - May be used in end-application: */
 		/* Macros: */
 			/** LED mask for the first LED on the board. */
-			#define LEDS_LED1        0
+			#define LEDS_LED1        (1 << 7)
 
 			/** LED mask for the second LED on the board. */
-			#define LEDS_LED2        0b00010000
+			#define LEDS_LED2        0
 
 			/** LED mask for the third LED on the board. */
 			#define LEDS_LED3        0
@@ -81,26 +81,26 @@
 		#if !defined(__DOXYGEN__)
 			static inline void LEDs_Init(void)
 			{
-            DDRD  |=  LEDS_LED2;
-            PORTD &= ~LEDS_LED2;
+            DDRB  |=  LEDS_ALL_LEDS;
+            PORTB &= ~LEDS_ALL_LEDS;
 			}
 
 			static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask)
 			{
-				if (LEDMask & LEDS_LED2)
-						PORTD |=  LEDS_LED2;
+				if (LEDMask & LEDS_ALL_LEDS)
+						PORTB |=  LEDS_ALL_LEDS;
 			}
 
 			static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask)
 			{
-				if (LEDMask & LEDS_LED2)
-						PORTD &= ~LEDS_LED2;
+				if (LEDMask & LEDS_ALL_LEDS)
+						PORTB &= ~LEDS_ALL_LEDS;
 			}
 
 			static inline void LEDs_Disable(void)
 			{
 						LEDs_TurnOffLEDs(LEDS_ALL_LEDS);
-            DDRD  &= ~LEDS_LED2;
+            DDRB  &= ~LEDS_ALL_LEDS;
 			}
 
 //			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
@@ -117,14 +117,14 @@
 
 			static inline void LEDs_ToggleLEDs(const uint8_t LEDMask)
 			{
-				if (LEDMask & LEDS_LED2)
-						PIND  =  LEDS_LED2;
+				if (LEDMask & LEDS_ALL_LEDS)
+						PINB  =  LEDS_ALL_LEDS;
 			}
 
 // 			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
 // 			static inline uint8_t LEDs_GetLEDs(void)
 // 			{
-// //             return PINC & LEDS_LED1;
+// //             return PINB & LEDS_ALL_LEDS;
 // 			}
 		#endif
 
