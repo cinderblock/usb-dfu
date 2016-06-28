@@ -26,6 +26,8 @@ AVRDUDE_PROGRAMMER = usbtiny
 
 AVRDUDE_FLAGS = -B.1
 
+LUFA_PATH    = LUFA/LUFA
+
 include local.mk
 
 # Flash size and bootloader section sizes of the target, in KB. These must
@@ -52,7 +54,7 @@ default: avrdude
 	
 avrdude: chip-reset
 chip-reset:
-	avrdude -c usbtiny -p m32u4 -B1 -e -U lfuse:w:0xDE:m -U hfuse:w:0xD8:m -U efuse:w:0xC8:m
+	avrdude -c usbtiny -p m32u4 -B100 -e -U lfuse:w:0xDE:m -U hfuse:w:0xD8:m -U efuse:w:0xC8:m
 
 # Include LUFA build script makefiles
 include $(LUFA_PATH)/Build/lufa_core.mk
