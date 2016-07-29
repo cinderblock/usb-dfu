@@ -28,7 +28,7 @@ AVRDUDE_FLAGS = -B.1
 
 LUFA_PATH    = LUFA/LUFA
 
--include local.$(hostname).mk
+-include local.$(shell hostname).mk
 
 # Flash size and bootloader section sizes of the target, in KB. These must
 # match the target's total FLASH size and the bootloader size set in the
