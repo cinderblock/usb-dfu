@@ -47,24 +47,20 @@
       </toolsSet>
       <compileType>
         <cTool>
-          <incDir>
-            <pElem>../lufa</pElem>
-          </incDir>
           <preprocessorList>
-            <Elem>F_CPU=8000000UL</Elem>
+            <Elem>F_CPU=16000000UL</Elem>
             <Elem>USB_CAN_BE_DEVICE</Elem>
             <Elem>__AVR_ATmega32U4__</Elem>
+            <Elem>__INCLUDE_FROM_LEDS_H</Elem>
           </preprocessorList>
         </cTool>
         <ccTool>
-          <incDir>
-            <pElem>../lufa</pElem>
-          </incDir>
           <preprocessorList>
-            <Elem>F_CPU=8000000UL</Elem>
+            <Elem>F_CPU=16000000UL</Elem>
             <Elem>USB_CAN_BE_DEVICE</Elem>
-            <Elem>__AVR_ATmega32U4__</Elem>
+            <Elem>__AVR_ATmega32U4____INCLUDE_FROM_LEDS_H</Elem>
           </preprocessorList>
+          <useLinkerLibraries>false</useLinkerLibraries>
         </ccTool>
       </compileType>
       <item path="Board/Board.h" ex="false" tool="3" flavor2="0">
