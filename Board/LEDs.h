@@ -4,7 +4,7 @@
 
   dean [at] fourwalledcubicle [dot] com
            www.lufa-lib.org
-*/
+ */
 
 /*
   Copyright 2013  Dean Camera (dean [at] fourwalledcubicle [dot] com)
@@ -26,7 +26,7 @@
   in an action of contract, negligence or other tortious action,
   arising out of or in connection with the use or performance of
   this software.
-*/
+ */
 
 /** \file
  *  \brief LUFA Custom Board LED Hardware Driver (Template)
@@ -39,69 +39,81 @@
  *
  *  This stub is for the board-specific component of the LUFA LEDs driver,
  *  for the LEDs (up to four) mounted on most development boards.
-*/
+ */
 
 #ifndef __LEDS_USER_H__
 #define __LEDS_USER_H__
 
-	/* Includes: */
-		// TODO: Add any required includes here
+/* Includes: */
+// TODO: Add any required includes here
 
-	/* Enable C linkage for C++ Compilers: */
-		#if defined(__cplusplus)
-			extern "C" {
-		#endif
+/* Enable C linkage for C++ Compilers: */
+#if defined(__cplusplus)
+extern "C" {
+#endif
 
-	/* Preprocessor Checks: */
-		#if !defined(__INCLUDE_FROM_LEDS_H)
-			#error Do not include this file directly. Include LUFA/Drivers/Board/LEDS.h instead.
-		#endif
+/* Preprocessor Checks: */
+#if !defined(__INCLUDE_FROM_LEDS_H)
+#error Do not include this file directly. Include LUFA/Drivers/Board/LEDS.h instead.
+#endif
 
-	/* Public Interface - May be used in end-application: */
-		/* Macros: */
-			/** LED mask for the first LED on the board. */
-			#define LEDS_LED1        (1 << 7)
+/* Public Interface - May be used in end-application: */
+/* Macros: */
+/** LED mask for the first LED on the board. */
+#define LEDS_LED1        (1 << 0)
 
-			/** LED mask for the second LED on the board. */
-			#define LEDS_LED2        0
+/** LED mask for the second LED on the board. */
+#define LEDS_LED2        (1 << 1)
 
-			/** LED mask for the third LED on the board. */
-			#define LEDS_LED3        0
+/** LED mask for the third LED on the board. */
+#define LEDS_LED3        0
 
-			/** LED mask for the fourth LED on the board. */
-			#define LEDS_LED4        0
+/** LED mask for the fourth LED on the board. */
+#define LEDS_LED4        0
 
-			/** LED mask for all the LEDs on the board. */
-			#define LEDS_ALL_LEDS    (LEDS_LED1 | LEDS_LED2 | LEDS_LED3 | LEDS_LED4)
+/** LED mask for all the LEDs on the board. */
+#define LEDS_ALL_LEDS    (LEDS_LED1 | LEDS_LED2 | LEDS_LED3 | LEDS_LED4)
 
-			/** LED mask for none of the board LEDs. */
-			#define LEDS_NO_LEDS     0
+/** LED mask for none of the board LEDs. */
+#define LEDS_NO_LEDS     0
 
-		/* Inline Functions: */
-		#if !defined(__DOXYGEN__)
-			static inline void LEDs_Init(void)
-			{
-            DDRB  |=  LEDS_ALL_LEDS;
-            PORTB &= ~LEDS_ALL_LEDS;
-			}
+/* Inline Functions: */
+#if !defined(__DOXYGEN__)
 
-			static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask)
-			{
-				if (LEDMask & LEDS_ALL_LEDS)
-						PORTB |=  LEDS_ALL_LEDS;
-			}
+static inline void LEDs_Init(void) {
+  // F4 is on board LED, active high, LEDS_LED1
+  PORTF &= ~1 << 4;
+  DDRF |= 1 << 4;
 
-			static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask)
-			{
-				if (LEDMask & LEDS_ALL_LEDS)
-						PORTB &= ~LEDS_ALL_LEDS;
-			}
+  // D5 is remote LED, active high, LEDS_LED2
+  PORTD &= ~1 << 5;
+  DDRD |= 1 << 5;
+}
 
-			static inline void LEDs_Disable(void)
-			{
-						LEDs_TurnOffLEDs(LEDS_ALL_LEDS);
-            DDRB  &= ~LEDS_ALL_LEDS;
-			}
+static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask) {
+  if (LEDMask & LEDS_LED1) {
+    PORTF |= 1 << 4;
+  }
+  if (LEDMask & LEDS_LED2) {
+    PORTD |= 1 << 5;
+  }
+}
+
+static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {
+  if (LEDMask & LEDS_LED1) {
+    PORTF &= ~1 << 4;
+  }
+  if (LEDMask & LEDS_LED2) {
+    PORTD &= ~1 << 5;
+  }
+}
+
+static inline void LEDs_Disable(void) {
+  LEDs_TurnOffLEDs(LEDS_ALL_LEDS);
+
+  DDRF &= ~1 << 4;
+  DDRD &= ~1 << 5;
+}
 
 //			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
 //			{
@@ -110,27 +122,29 @@
 //             PORTC &= ~(LEDMask & ~ActiveMask & LEDS_LED1);
 //			}
 
-			static inline void LEDs_SetAllLEDs(const uint8_t LEDMask)
-			{
-        	LEDs_TurnOnLEDs(LEDMask);
-			}
+static inline void LEDs_SetAllLEDs(const uint8_t LEDMask) {
+  LEDs_TurnOnLEDs(LEDMask);
+}
 
-			static inline void LEDs_ToggleLEDs(const uint8_t LEDMask)
-			{
-				if (LEDMask & LEDS_ALL_LEDS)
-						PINB  =  LEDS_ALL_LEDS;
-			}
+static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {
+  if (LEDMask & LEDS_LED1) {
+    PINF = 1 << 4;
+  }
+  if (LEDMask & LEDS_LED2) {
+    PIND = 1 << 5;
+  }
+}
 
 // 			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
 // 			static inline uint8_t LEDs_GetLEDs(void)
 // 			{
 // //             return PINB & LEDS_ALL_LEDS;
 // 			}
-		#endif
+#endif
 
-	/* Disable C linkage for C++ Compilers: */
-		#if defined(__cplusplus)
-			}
-		#endif
+/* Disable C linkage for C++ Compilers: */
+#if defined(__cplusplus)
+}
+#endif
 
 #endif
