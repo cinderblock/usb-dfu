@@ -51,6 +51,7 @@
             <Elem>F_CPU=16000000UL</Elem>
             <Elem>USB_CAN_BE_DEVICE</Elem>
             <Elem>__AVR_ATmega32U4__</Elem>
+            <Elem>__INCLUDE_FROM_BUTTONS_H</Elem>
             <Elem>__INCLUDE_FROM_LEDS_H</Elem>
           </preprocessorList>
         </cTool>
@@ -58,7 +59,9 @@
           <preprocessorList>
             <Elem>F_CPU=16000000UL</Elem>
             <Elem>USB_CAN_BE_DEVICE</Elem>
-            <Elem>__AVR_ATmega32U4____INCLUDE_FROM_LEDS_H</Elem>
+            <Elem>__AVR_ATmega32U4__</Elem>
+            <Elem>__INCLUDE_FROM_BUTTONS_H</Elem>
+            <Elem>__INCLUDE_FROM_LEDS_H</Elem>
           </preprocessorList>
           <useLinkerLibraries>false</useLinkerLibraries>
         </ccTool>
