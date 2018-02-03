@@ -63,7 +63,7 @@ extern "C" {
 #define LEDS_LED1        (1 << 0)
 
 /** LED mask for the second LED on the board. */
-#define LEDS_LED2        (1 << 1)
+#define LEDS_LED2        0
 
 /** LED mask for the third LED on the board. */
 #define LEDS_LED3        0
@@ -82,37 +82,26 @@ extern "C" {
 
 static inline void LEDs_Init(void) {
   // F4 is on board LED, active high, LEDS_LED1
-  PORTF &= ~1 << 4;
-  DDRF |= 1 << 4;
-
-  // D5 is remote LED, active high, LEDS_LED2
-  PORTD &= ~1 << 5;
-  DDRD |= 1 << 5;
+  PORTB &= ~1 << 7;
+  DDRB |= 1 << 7;
 }
 
 static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    PORTF |= 1 << 4;
-  }
-  if (LEDMask & LEDS_LED2) {
-    PORTD |= 1 << 5;
+    PORTB |= 1 << 7;
   }
 }
 
 static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    PORTF &= ~1 << 4;
-  }
-  if (LEDMask & LEDS_LED2) {
-    PORTD &= ~1 << 5;
+    PORTB &= ~1 << 7;
   }
 }
 
 static inline void LEDs_Disable(void) {
   LEDs_TurnOffLEDs(LEDS_ALL_LEDS);
 
-  DDRF &= ~1 << 4;
-  DDRD &= ~1 << 5;
+  DDRB &= ~1 << 7;
 }
 
 //			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
@@ -128,10 +117,7 @@ static inline void LEDs_SetAllLEDs(const uint8_t LEDMask) {
 
 static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    PINF = 1 << 4;
-  }
-  if (LEDMask & LEDS_LED2) {
-    PIND = 1 << 5;
+    PINB = 1 << 7;
   }
 }
 
