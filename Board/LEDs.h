@@ -82,26 +82,23 @@ extern "C" {
 
 static inline void LEDs_Init(void) {
   // F4 is on board LED, active high, LEDS_LED1
-  PORTB &= ~1 << 7;
-  DDRB |= 1 << 7;
 }
 
 static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    PORTB |= 1 << 7;
+    PORTB |= 1<<4;
   }
 }
 
 static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    PORTB &= ~1 << 7;
+    PORTB &= ~(1<<4);
   }
 }
 
 static inline void LEDs_Disable(void) {
   LEDs_TurnOffLEDs(LEDS_ALL_LEDS);
 
-  DDRB &= ~1 << 7;
 }
 
 //			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
@@ -117,7 +114,7 @@ static inline void LEDs_SetAllLEDs(const uint8_t LEDMask) {
 
 static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    PINB = 1 << 7;
+    PINB |= 1<<4;
   }
 }
 
