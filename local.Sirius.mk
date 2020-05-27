@@ -1,0 +1,1 @@
+COMPILER_PATH = C:/Progra~2/avr8-gnu-toolchain-win32_x86-3.6.2/bin/

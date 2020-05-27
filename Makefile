@@ -11,24 +11,31 @@
 
 # Run "make help" for target help.
 
-MCU          = at90usb1287
+MCU          = atmega32u2
 ARCH         = AVR8
-BOARD        = USBKEY
-F_CPU        = 8000000
+BOARD        = BOARD_USER
+F_CPU        = 16000000
 F_USB        = $(F_CPU)
 OPTIMIZATION = s
 TARGET       = BootloaderDFU
 SRC          = $(TARGET).c Descriptors.c BootloaderAPI.c BootloaderAPITable.S $(LUFA_SRC_USB)
-LUFA_PATH    = ../../LUFA
 CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/ -DBOOT_START_ADDR=$(BOOT_START_OFFSET)
 LD_FLAGS     = -Wl,--section-start=.text=$(BOOT_START_OFFSET) $(BOOT_API_LD_FLAGS)
-LTO          = Y
+# LTO          = Y
+
+AVRDUDE_PROGRAMMER = usbtiny
+
+AVRDUDE_FLAGS = -B.1 -D
+
+LUFA_PATH    = LUFA/LUFA
+
+-include local.$(shell hostname).mk
 
 # Flash size and bootloader section sizes of the target, in KB. These must
 # match the target's total FLASH size and the bootloader size set in the
 # device's fuses.
-FLASH_SIZE_KB         = 128
-BOOT_SECTION_SIZE_KB  = 8
+FLASH_SIZE_KB         = 32
+BOOT_SECTION_SIZE_KB  = 4
 
 # Bootloader address calculation formulas
 # Do not modify these macros, but rather modify the dependent values above.
@@ -44,7 +51,12 @@ BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_jumptable,   Boot
 BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_signatures,  BootloaderAPI_Signatures,  8)
 
 # Default target
-all:
+default: avrdude
+	
+avrdude: chip-reset
+chip-reset:
+	avrdude -c usbtiny -p m32u2 -B100 -e
+	avrdude -c usbtiny -p m32u2 -B100 -U lfuse:w:0xDE:m -U hfuse:w:0xD8:m -U efuse:w:0xDE:m -U lock:w:0x3A:m
 
 # Include LUFA-specific DMBS extension modules
 DMBS_LUFA_PATH ?= $(LUFA_PATH)/Build/LUFA
