@@ -11,7 +11,7 @@
 
 # Run "make help" for target help.
 
-MCU          = atmega32u4
+MCU          = atmega32u2
 ARCH         = AVR8
 BOARD        = BOARD_USER
 F_CPU        = 16000000
@@ -24,7 +24,7 @@ LD_FLAGS     = -Wl,--section-start=.text=$(BOOT_START_OFFSET) $(BOOT_API_LD_FLAG
 
 AVRDUDE_PROGRAMMER = usbtiny
 
-AVRDUDE_FLAGS = -B.1
+AVRDUDE_FLAGS = -B5
 
 LUFA_PATH    = LUFA/LUFA
 
@@ -54,8 +54,9 @@ default: avrdude
 	
 avrdude: chip-reset
 chip-reset:
-	avrdude -c usbtiny -p m32u4 -B100 -e
-	avrdude -c usbtiny -p m32u4 -B100 -U lfuse:w:0xDE:m -U hfuse:w:0xD8:m -U efuse:w:0xC8:m -U lock:w:0x3A:m
+	avrdude -c usbtiny -p m32u2 -B100 -e
+	avrdude -c usbtiny -p m32u2 -B100 -U lfuse:w:0xDE:m -U hfuse:w:0xC8:m -U efuse:w:0xDE:m
+	# -U lock:w:0x3A:m
 
 # Include LUFA build script makefiles
 include $(LUFA_PATH)/Build/lufa_core.mk
