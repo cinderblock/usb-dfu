@@ -56,7 +56,7 @@ default: avrdude
 avrdude: chip-reset
 chip-reset:
 	avrdude -c usbtiny -p m32u2 -B100 -e
-	avrdude -c usbtiny -p m32u2 -B100 -U lfuse:w:0xDE:m -U hfuse:w:0xD8:m -U efuse:w:0xDE:m -U lock:w:0x3A:m
+	avrdude -c usbtiny -p m32u2 -B100 -U lfuse:w:0xDE:m -U hfuse:w:0xD8:m -U efuse:w:0xFE:m -U lock:w:0x3A:m
 
 # Include LUFA-specific DMBS extension modules
 DMBS_LUFA_PATH ?= $(LUFA_PATH)/Build/LUFA
