@@ -80,13 +80,23 @@ extern "C" {
 /* Inline Functions: */
 #if !defined(__DOXYGEN__)
 
-static inline void LEDs_Init(void) {}
+static inline void LEDs_Init(void) {
+  // F4 is on board LED, active high, LEDS_LED1
+}
 
-static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask) {}
+static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask) {
+  if (LEDMask & LEDS_LED1) {
+    PORTB |= 1 << 4;
+  }
+}
 
-static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {}
+static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {
+  if (LEDMask & LEDS_LED1) {
+    PORTB &= ~(1 << 4);
+  }
+}
 
-static inline void LEDs_Disable(void) {}
+static inline void LEDs_Disable(void) { LEDs_TurnOffLEDs(LEDS_ALL_LEDS); }
 
 //			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
 //			{
@@ -95,9 +105,13 @@ static inline void LEDs_Disable(void) {}
 //             PORTC &= ~(LEDMask & ~ActiveMask & LEDS_LED1);
 //			}
 
-static inline void LEDs_SetAllLEDs(const uint8_t LEDMask) {}
+static inline void LEDs_SetAllLEDs(const uint8_t LEDMask) { LEDs_TurnOnLEDs(LEDMask); }
 
-static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {}
+static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {
+  if (LEDMask & LEDS_LED1) {
+    PINB |= 1 << 4;
+  }
+}
 
 // 			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
 // 			static inline uint8_t LEDs_GetLEDs(void)
