@@ -136,7 +136,7 @@ void Application_Jump_Check(void)
 		if (!(BootloaderAPI_ReadFuse(GET_HIGH_FUSE_BITS) & ~FUSE_BOOTRST))
 		{
 			/* If the reset source was not an external reset or the key is correct, clear it and jump to the application */
-			if (!(MCUSR & (1 << EXTRF)) || (MagicBootKey == MAGIC_BOOT_KEY))
+			if (MagicBootKey == MAGIC_BOOT_KEY)
 			  JumpToApplication = true;
 
 			/* Clear reset source */

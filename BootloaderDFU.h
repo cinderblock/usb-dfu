@@ -210,7 +210,7 @@
 			static void ProcessReadCommand(void);
 		#endif
 
-		// void Application_Jump_Check(void) ATTR_INIT_SECTION(3);
+		void Application_Jump_Check(void) ATTR_INIT_SECTION(3);
 
 #endif
 
