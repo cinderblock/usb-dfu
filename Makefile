@@ -51,9 +51,8 @@ BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_jumptable,   Boot
 BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_signatures,  BootloaderAPI_Signatures,  8)
 
 # Default target
-default: avrdude
+default: chip-reset avrdude
 	
-avrdude: chip-reset
 chip-reset:
 	avrdude -c usbtiny -p m32u2 -B100 -e
 	avrdude -c usbtiny -p m32u2 -B100 -U lfuse:w:0xDE:m -U hfuse:w:0xD8:m -U efuse:w:0xFE:m
