@@ -82,17 +82,18 @@ extern "C" {
 
 static inline void LEDs_Init(void) {
   // F4 is on board LED, active high, LEDS_LED1
+  DDRC |= 1 << 7;
 }
 
 static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    PORTB |= 1 << 4;
+    PORTC |= 1 << 7;
   }
 }
 
 static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    PORTB &= ~(1 << 4);
+    PORTC &= ~(1 << 7);
   }
 }
 
@@ -109,14 +110,14 @@ static inline void LEDs_SetAllLEDs(const uint8_t LEDMask) { LEDs_TurnOnLEDs(LEDM
 
 static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    PINB |= 1 << 4;
+    PINC |= 1 << 7;
   }
 }
 
 // 			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
 // 			static inline uint8_t LEDs_GetLEDs(void)
 // 			{
-// //             return PINB & LEDS_ALL_LEDS;
+// //             return PINC & LEDS_ALL_LEDS;
 // 			}
 #endif
 
