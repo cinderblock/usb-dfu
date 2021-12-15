@@ -36,6 +36,10 @@
 #define  INCLUDE_FROM_BOOTLOADER_C
 #include "BootloaderDFU.h"
 
+#define ws2812_port B
+#define ws2812_pin  6
+#include "Board/light_ws2812.c"
+
 /** Flag to indicate if the bootloader is currently running in secure mode, disallowing memory operations
  *  other than erase. This is initially set to the value set by SECURE_MODE, and cleared by the bootloader
  *  once a memory erase has completed in a bootloader session.
