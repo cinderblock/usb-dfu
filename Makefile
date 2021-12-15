@@ -11,10 +11,10 @@
 
 # Run "make help" for target help.
 
-MCU          = atmega32u2
+MCU          = atmega32u4
 ARCH         = AVR8
 BOARD        = BOARD_USER
-F_CPU        = 8000000
+F_CPU        = 16000000
 F_USB        = $(F_CPU)
 OPTIMIZATION = s
 TARGET       = BootloaderDFU
@@ -54,8 +54,8 @@ BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_signatures,  Boot
 default: chip-reset avrdude
 	
 chip-reset:
-	avrdude -c usbtiny -p m32u2 -B100 -e
-	avrdude -c usbtiny -p m32u2 -B100 -U lfuse:w:0xDE:m -U hfuse:w:0xD8:m -U efuse:w:0xDE:m
+	avrdude -c usbtiny -p m32u4 -B100 -e
+	avrdude -c usbtiny -p m32u4 -B100 -U lfuse:w:0xCE:m	-U hfuse:w:0xD0:m	-U efuse:w:0xFB:m
 
 # Include LUFA-specific DMBS extension modules
 DMBS_LUFA_PATH ?= $(LUFA_PATH)/Build/LUFA
