@@ -62,16 +62,16 @@ extern "C" {
 /* Public Interface - May be used in end-application: */
 /* Macros: */
 /** LED mask for the first LED on the board. */
-#define LEDS_LED1 (1 << 0)
+#define LEDS_LED1 _BV(0)
 
 /** LED mask for the second LED on the board. */
-#define LEDS_LED2 0
+#define LEDS_LED2 _BV(1)
 
 /** LED mask for the third LED on the board. */
-#define LEDS_LED3 0
+#define LEDS_LED3 _BV(2)
 
 /** LED mask for the fourth LED on the board. */
-#define LEDS_LED4 0
+#define LEDS_LED4 _BV(3)
 
 /** LED mask for all the LEDs on the board. */
 #define LEDS_ALL_LEDS (LEDS_LED1 | LEDS_LED2 | LEDS_LED3 | LEDS_LED4)
