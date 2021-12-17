@@ -18,8 +18,8 @@ F_CPU        = 16000000
 F_USB        = $(F_CPU)
 OPTIMIZATION = s
 TARGET       = BootloaderDFU
-SRC          = $(TARGET).c Descriptors.c BootloaderAPI.c BootloaderAPITable.S $(LUFA_SRC_USB)
-CC_FLAGS     = -DUSE_LUFA_CONFIG_HEADER -IConfig/ -DBOOT_START_ADDR=$(BOOT_START_OFFSET)
+SRC          = $(TARGET).c Descriptors.c LEDs.cpp BootloaderAPI.c BootloaderAPITable.S $(LUFA_SRC_USB)
+CC_FLAGS     = -std=gnu++11 -DUSE_LUFA_CONFIG_HEADER -UAVR -IConfig -IAVR++ -DBOOT_START_ADDR=$(BOOT_START_OFFSET)
 LD_FLAGS     = -Wl,--section-start=.text=$(BOOT_START_OFFSET) $(BOOT_API_LD_FLAGS)
 # LTO          = Y
 

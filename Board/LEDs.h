@@ -44,7 +44,7 @@
 #ifndef __LEDS_USER_H__
 #define __LEDS_USER_H__
 
-#include "light_ws2812.h"
+#include <stdint.h>
 
 /* Includes: */
 // TODO: Add any required includes here
@@ -82,9 +82,16 @@ extern "C" {
 /* Inline Functions: */
 #if !defined(__DOXYGEN__)
 
-struct cRGB buffer[6] = {
-    {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0},
+struct GRB {
+  // Matches datasheet
+  uint8_t g;
+  uint8_t r;
+  uint8_t b;
 };
+
+extern struct GRB buffer[6];
+
+void update_leds();
 
 static inline void LEDs_Init(void) {}
 
@@ -109,7 +116,7 @@ static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask) {
     buffer[3].g = 255;
     // buffer[3].b = 255; // Disable?
   }
-  ws2812_setleds(buffer, 6);
+  update_leds();
 }
 
 static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {
@@ -133,7 +140,7 @@ static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {
     buffer[3].g = 0;
     // buffer[3].b = 0; // Disable?
   }
-  ws2812_setleds(buffer, 6);
+  update_leds();
 }
 
 static inline void LEDs_Disable(void) { LEDs_TurnOffLEDs(LEDS_ALL_LEDS); }
@@ -168,7 +175,7 @@ static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {
     buffer[3].g ^= 255;
     // buffer[3].b ^= 255; // Disable?
   }
-  ws2812_setleds(buffer, 6);
+  update_leds();
 }
 
 // 			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
