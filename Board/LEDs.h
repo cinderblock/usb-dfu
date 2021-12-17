@@ -90,48 +90,48 @@ static inline void LEDs_Init(void) {}
 
 static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    buffer[0].r = 255;
-    buffer[0].g = 255; // Disable?
-    buffer[0].b = 255; // Disable?
+    // buffer[0].r = 255;
+    // buffer[0].g = 255; // Disable?
+    buffer[0].b = 127; // Disable?
   }
   if (LEDMask & LEDS_LED2) {
-    buffer[1].r = 255;
-    buffer[1].g = 255; // Disable?
-    buffer[1].b = 255; // Disable?
+    // buffer[1].r = 255;
+    // buffer[1].g = 255; // Disable?
+    buffer[1].b = 127; // Disable?
   }
   if (LEDMask & LEDS_LED3) {
-    buffer[2].r = 255; // Disable?
+    // buffer[2].r = 255; // Disable?
     buffer[2].g = 255;
-    buffer[2].b = 255; // Disable?
+    // buffer[2].b = 255; // Disable?
   }
   if (LEDMask & LEDS_LED4) {
-    buffer[3].r = 255; // Disable?
+    // buffer[3].r = 255; // Disable?
     buffer[3].g = 255;
-    buffer[3].b = 255; // Disable?
+    // buffer[3].b = 255; // Disable?
   }
   ws2812_setleds(buffer, 6);
 }
 
 static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    buffer[0].r = 0;
-    buffer[0].g = 0; // Disable?
+    // buffer[0].r = 0;
+    // buffer[0].g = 0; // Disable?
     buffer[0].b = 0; // Disable?
   }
   if (LEDMask & LEDS_LED2) {
-    buffer[1].r = 0;
-    buffer[1].g = 0; // Disable?
+    // buffer[1].r = 0;
+    // buffer[1].g = 0; // Disable?
     buffer[1].b = 0; // Disable?
   }
   if (LEDMask & LEDS_LED3) {
-    buffer[2].r = 0; // Disable?
+    // buffer[2].r = 0; // Disable?
     buffer[2].g = 0;
-    buffer[2].b = 0; // Disable?
+    // buffer[2].b = 0; // Disable?
   }
   if (LEDMask & LEDS_LED4) {
-    buffer[3].r = 0; // Disable?
+    // buffer[3].r = 0; // Disable?
     buffer[3].g = 0;
-    buffer[3].b = 0; // Disable?
+    // buffer[3].b = 0; // Disable?
   }
   ws2812_setleds(buffer, 6);
 }
@@ -149,24 +149,24 @@ static inline void LEDs_SetAllLEDs(const uint8_t LEDMask) { LEDs_TurnOnLEDs(LEDM
 
 static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    buffer[0].r ^= 255;
-    buffer[0].g ^= 255; // Disable?
-    buffer[0].b ^= 255; // Disable?
+    // buffer[0].r ^= 255;
+    // buffer[0].g ^= 255; // Disable?
+    buffer[0].b ^= 127; // Disable?
   }
   if (LEDMask & LEDS_LED2) {
-    buffer[1].r ^= 255;
-    buffer[1].g ^= 255; // Disable?
-    buffer[1].b ^= 255; // Disable?
+    // buffer[1].r ^= 255;
+    // buffer[1].g ^= 255; // Disable?
+    buffer[1].b ^= 127; // Disable?
   }
   if (LEDMask & LEDS_LED3) {
-    buffer[2].r ^= 255; // Disable?
+    // buffer[2].r ^= 255; // Disable?
     buffer[2].g ^= 255;
-    buffer[2].b ^= 255; // Disable?
+    // buffer[2].b ^= 255; // Disable?
   }
   if (LEDMask & LEDS_LED4) {
-    buffer[3].r ^= 255; // Disable?
+    // buffer[3].r ^= 255; // Disable?
     buffer[3].g ^= 255;
-    buffer[3].b ^= 255; // Disable?
+    // buffer[3].b ^= 255; // Disable?
   }
   ws2812_setleds(buffer, 6);
 }
