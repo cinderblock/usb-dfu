@@ -250,6 +250,14 @@ ISR(TIMER1_OVF_vect, ISR_BLOCK)
 	LEDs_ToggleLEDs(LEDS_LED1 | LEDS_LED2);
 }
 
+void EVENT_USB_Device_Connect() {
+	LEDs_TurnOnLEDs(LEDS_LED4);
+}
+
+void EVENT_USB_Device_Disconnect() {
+	LEDs_TurnOffLEDs(LEDS_LED4);
+}
+
 /** Event handler for the USB_ControlRequest event. This is used to catch and process control requests sent to
  *  the device from the USB host before passing along unhandled control requests to the library for processing
  *  internally.
@@ -264,7 +272,7 @@ void EVENT_USB_Device_ControlRequest(void)
 	}
 
 	/* Activity - toggle indicator LEDs */
-	LEDs_ToggleLEDs(LEDS_LED1 | LEDS_LED2);
+	LEDs_ToggleLEDs(LEDS_LED3);
 
 	/* Get the size of the command and data from the wLength value */
 	SentCommand.DataSize = USB_ControlRequest.wLength;
