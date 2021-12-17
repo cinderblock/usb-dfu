@@ -99,12 +99,12 @@ static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
     // buffer[0].r = 255;
     // buffer[0].g = 255; // Disable?
-    buffer[0].b = 127; // Disable?
+    buffer[0].b = 64; // Disable?
   }
   if (LEDMask & LEDS_LED2) {
     // buffer[1].r = 255;
     // buffer[1].g = 255; // Disable?
-    buffer[1].b = 127; // Disable?
+    buffer[1].b = 64; // Disable?
   }
   if (LEDMask & LEDS_LED3) {
     // buffer[2].r = 255; // Disable?
@@ -158,12 +158,12 @@ static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
     // buffer[0].r ^= 255;
     // buffer[0].g ^= 255; // Disable?
-    buffer[0].b ^= 127; // Disable?
+    buffer[0].b ^= 64; // Disable?
   }
   if (LEDMask & LEDS_LED2) {
     // buffer[1].r ^= 255;
     // buffer[1].g ^= 255; // Disable?
-    buffer[1].b ^= 127; // Disable?
+    buffer[1].b ^= 64; // Disable?
   }
   if (LEDMask & LEDS_LED3) {
     // buffer[2].r ^= 255; // Disable?
