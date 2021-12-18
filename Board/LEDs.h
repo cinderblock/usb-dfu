@@ -46,10 +46,6 @@
 
 #include <stdint.h>
 
-/* Includes: */
-// TODO: Add any required includes here
-
-/* Enable C linkage for C++ Compilers: */
 #if defined(__cplusplus)
 extern "C" {
 #endif
@@ -86,9 +82,6 @@ extern "C" {
 
 /** LED mask for none of the board LEDs. */
 #define LEDS_NO_LEDS 0
-
-/* Inline Functions: */
-#if !defined(__DOXYGEN__)
 
 struct GRB {
   // Matches datasheet
@@ -150,12 +143,11 @@ static inline void LEDs_Disable(void) {
   LEDs_TurnOffLEDs(LEDS_ALL_LEDS);
 }
 
-//			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
-//			{
-//				// Add code to set the Leds in the given LEDMask to the status given in ActiveMask here
-//             PORTC |= LEDMask & ActiveMask & LEDS_LED1;
-//             PORTC &= ~(LEDMask & ~ActiveMask & LEDS_LED1);
-//			}
+// static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask) {
+//   // Add code to set the Leds in the given LEDMask to the status given in ActiveMask here
+//   PORTC |= LEDMask & ActiveMask & LEDS_LED1;
+//   PORTC &= ~(LEDMask & ~ActiveMask & LEDS_LED1);
+// }
 
 static inline void LEDs_SetAllLEDs(const uint8_t LEDMask) { LEDs_TurnOnLEDs(LEDMask); }
 
@@ -175,14 +167,11 @@ static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {
   update_leds();
 }
 
-// 			static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
-// 			static inline uint8_t LEDs_GetLEDs(void)
-// 			{
-// //             return PINC & LEDS_ALL_LEDS;
-// 			}
-#endif
+// static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
+// static inline uint8_t LEDs_GetLEDs(void) {
+//   //             return PINC & LEDS_ALL_LEDS;
+// }
 
-/* Disable C linkage for C++ Compilers: */
 #if defined(__cplusplus)
 }
 #endif
