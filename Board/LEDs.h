@@ -61,16 +61,24 @@ extern "C" {
 
 /* Public Interface - May be used in end-application: */
 /* Macros: */
-/** LED mask for the first LED on the board. */
+/** LED mask for the first LED on the board.
+ * Shows board is alive
+ */
 #define LEDS_LED1 _BV(0)
 
-/** LED mask for the second LED on the board. */
+/** LED mask for the second LED on the board.
+ * Shows board is alive
+ */
 #define LEDS_LED2 _BV(1)
 
-/** LED mask for the third LED on the board. */
+/** LED mask for the third LED on the board.
+ * Activity on USB
+ */
 #define LEDS_LED3 _BV(2)
 
-/** LED mask for the fourth LED on the board. */
+/** LED mask for the fourth LED on the board.
+ * Use to show connection status to the host
+ */
 #define LEDS_LED4 _BV(3)
 
 /** LED mask for all the LEDs on the board. */
@@ -89,6 +97,15 @@ struct GRB {
   uint8_t b;
 };
 
+#define ConnectedLED 5 // Green
+#define ActivityLED 4  // Red
+#define ActiveLED0 0   // Blue
+#define ActiveLED1 3   // Blue
+
+#define ConnectedLEDIntensity 64
+#define ActivityLEDIntensity 64
+#define ActiveLEDIntensity 64
+
 extern struct GRB buffer[6];
 
 void update_leds();
@@ -97,53 +114,41 @@ static inline void LEDs_Init(void) {}
 
 static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    // buffer[0].r = 255;
-    // buffer[0].g = 255; // Disable?
-    buffer[0].b = 64; // Disable?
+    buffer[ActiveLED0].b = ActiveLEDIntensity;
   }
   if (LEDMask & LEDS_LED2) {
-    // buffer[1].r = 255;
-    // buffer[1].g = 255; // Disable?
-    buffer[1].b = 64; // Disable?
+    buffer[ActiveLED1].b = ActiveLEDIntensity;
   }
   if (LEDMask & LEDS_LED3) {
-    // buffer[2].r = 255; // Disable?
-    buffer[2].g = 255;
-    // buffer[2].b = 255; // Disable?
+    buffer[ActivityLED].r = ActivityLEDIntensity;
   }
   if (LEDMask & LEDS_LED4) {
-    // buffer[3].r = 255; // Disable?
-    buffer[3].g = 255;
-    // buffer[3].b = 255; // Disable?
+    buffer[ConnectedLED].g = ConnectedLEDIntensity;
   }
   update_leds();
 }
 
 static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    // buffer[0].r = 0;
-    // buffer[0].g = 0; // Disable?
-    buffer[0].b = 0; // Disable?
+    buffer[ActiveLED0].b = 0;
   }
   if (LEDMask & LEDS_LED2) {
-    // buffer[1].r = 0;
-    // buffer[1].g = 0; // Disable?
-    buffer[1].b = 0; // Disable?
+    buffer[ActiveLED1].b = 0;
   }
   if (LEDMask & LEDS_LED3) {
-    // buffer[2].r = 0; // Disable?
-    buffer[2].g = 0;
-    // buffer[2].b = 0; // Disable?
+    buffer[ActivityLED].r = 0;
   }
   if (LEDMask & LEDS_LED4) {
-    // buffer[3].r = 0; // Disable?
-    buffer[3].g = 0;
-    // buffer[3].b = 0; // Disable?
+    buffer[ConnectedLED].g = 0;
   }
   update_leds();
 }
 
-static inline void LEDs_Disable(void) { LEDs_TurnOffLEDs(LEDS_ALL_LEDS); }
+static inline void LEDs_Disable(void) {
+  // Use one that isn't otherwise used
+  buffer[0].g = 64;
+  LEDs_TurnOffLEDs(LEDS_ALL_LEDS);
+}
 
 //			static inline void LEDs_ChangeLEDs(const uint8_t LEDMask, const uint8_t ActiveMask)
 //			{
@@ -156,24 +161,16 @@ static inline void LEDs_SetAllLEDs(const uint8_t LEDMask) { LEDs_TurnOnLEDs(LEDM
 
 static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED1) {
-    // buffer[0].r ^= 255;
-    // buffer[0].g ^= 255; // Disable?
-    buffer[0].b ^= 64; // Disable?
+    buffer[ActiveLED0].b ^= ActiveLEDIntensity;
   }
   if (LEDMask & LEDS_LED2) {
-    // buffer[1].r ^= 255;
-    // buffer[1].g ^= 255; // Disable?
-    buffer[1].b ^= 64; // Disable?
+    buffer[ActiveLED1].b ^= ActiveLEDIntensity;
   }
   if (LEDMask & LEDS_LED3) {
-    // buffer[2].r ^= 255; // Disable?
-    buffer[2].g ^= 255;
-    // buffer[2].b ^= 255; // Disable?
+    buffer[ActivityLED].r ^= ActivityLEDIntensity;
   }
   if (LEDMask & LEDS_LED4) {
-    // buffer[3].r ^= 255; // Disable?
-    buffer[3].g ^= 255;
-    // buffer[3].b ^= 255; // Disable?
+    buffer[ConnectedLED].g ^= ConnectedLEDIntensity;
   }
   update_leds();
 }
