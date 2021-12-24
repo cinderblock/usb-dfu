@@ -101,7 +101,7 @@ struct GRB {
 
 extern struct GRB buffer[6];
 
-void update_leds();
+void LEDs_Update(void);
 
 static inline void LEDs_Init(void) {}
 
@@ -118,7 +118,7 @@ static inline void LEDs_TurnOnLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED4) {
     buffer[ConnectedLED].g = ConnectedLEDIntensity;
   }
-  update_leds();
+  LEDs_Update();
 }
 
 static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {
@@ -134,7 +134,7 @@ static inline void LEDs_TurnOffLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED4) {
     buffer[ConnectedLED].g = 0;
   }
-  update_leds();
+  LEDs_Update();
 }
 
 static inline void LEDs_Disable(void) {
@@ -164,7 +164,7 @@ static inline void LEDs_ToggleLEDs(const uint8_t LEDMask) {
   if (LEDMask & LEDS_LED4) {
     buffer[ConnectedLED].g ^= ConnectedLEDIntensity;
   }
-  update_leds();
+  LEDs_Update();
 }
 
 // static inline uint8_t LEDs_GetLEDs(void) ATTR_WARN_UNUSED_RESULT;
