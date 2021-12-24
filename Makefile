@@ -20,7 +20,9 @@ OPTIMIZATION = s
 TARGET       = BootloaderDFU
 SRC          = $(TARGET).c Descriptors.c LEDs.cpp BootloaderAPI.c BootloaderAPITable.S $(LUFA_SRC_USB)
 CC_FLAGS     = -Wfatal-errors -DUSE_LUFA_CONFIG_HEADER -UAVR -IConfig -IAVR++ -DBOOT_START_ADDR=$(BOOT_START_OFFSET)
-CPP_FLAGS     = -std=gnu++11
+C_STANDARD   = gnu11
+CPP_STANDARD = gnu++14
+
 LD_FLAGS     = -Wl,--section-start=.text=$(BOOT_START_OFFSET) $(BOOT_API_LD_FLAGS)
 # LTO          = Y
 

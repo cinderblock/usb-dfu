@@ -12,7 +12,7 @@
       ],
       "defines": ["F_CPU=16000000UL", "F_USB=F_CPU", "USE_LUFA_CONFIG_HEADER"],
       "cStandard": "c11",
-      "cppStandard": "c++11"
+      "cppStandard": "c++14"
     }
   ],
   "version": 4
