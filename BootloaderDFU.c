@@ -212,16 +212,16 @@ static void SetupHardware(void)
 	clock_prescale_set(clock_div_1);
 
 	/* Relocate the interrupt vector table to the bootloader section */
-	MCUCR = (1 << IVCE);
-	MCUCR = (1 << IVSEL);
+	MCUCR = 1 << IVCE;
+	MCUCR = 1 << IVSEL;
 
 	/* Initialize the USB and other board hardware drivers */
 	USB_Init();
 	LEDs_Init();
 
 	/* Bootloader active LED toggle timer initialization */
-	TIMSK1 = (1 << TOIE1);
-	TCCR1B = ((1 << CS11) | (1 << CS10));
+	TIMSK1 = 1 << TOIE1;
+	TCCR1B = (1 << CS11) | (1 << CS10);
 }
 
 /** Resets all configured hardware required for the bootloader back to their original states. */
@@ -236,7 +236,7 @@ static void ResetHardware(void)
 	TCCR1B = 0;
 
 	/* Relocate the interrupt vector table back to the application section */
-	MCUCR = (1 << IVCE);
+	MCUCR = 1 << IVCE;
 	MCUCR = 0;
 }
 
