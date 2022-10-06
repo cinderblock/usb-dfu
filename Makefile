@@ -56,6 +56,8 @@ BOOT_SECTION_LD_FLAG  = -Wl,--section-start=$(strip $(1))=$(call BOOT_SEC_OFFSET
 # Default target
 default: chip-reset avrdude
 
+build: $(TARGET).hex
+
 asm:
 	"C:/Program Files/avr-gcc-11.1.0-x64-windows/bin/"avr-gcc -S -pipe -gdwarf-2 -g2 -mmcu=atmega32u4 -fshort-enums -fno-inline-small-functions -Wall -fno-strict-aliasing -funsigned-char -funsigned-bitfields -ffunction-sections -I. -DARCH=ARCH_AVR8 -DF_CPU=16000000UL -mrelax -fno-jump-tables -x c++ -Os -std=gnu++14 -fno-exceptions -fno-threadsafe-statics -Wfatal-errors -DUSE_LUFA_CONFIG_HEADER -UAVR -IConfig -IAVR++ -DBOOT_START_ADDR=0x7000 -I. -ILUFA/LUFA/.. -DARCH=ARCH_AVR8 -DBOARD=BOARD_BOARD_USER -DF_USB=$(F_CPU) -MMD -MP -MF obj/LEDs.d LEDs.cpp -o obj/LEDs.S
 	
@@ -69,7 +71,7 @@ version:
 	@echo -n "GXX Ver	"avr-g++" "
 	avr-g++ --version | head -n 1
 
-.PHONY: defualt asm chip-reset version bootloader-assembly
+.PHONY: defualt build asm chip-reset version bootloader-assembly
 
 bootloader-assembly: obj/BootloaderDFU.s
 
