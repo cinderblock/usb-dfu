@@ -54,7 +54,7 @@ BOOT_SECTION_LD_FLAG  = -Wl,--section-start=$(strip $(1))=$(call BOOT_SEC_OFFSET
 # BOOT_API_LD_FLAGS    += $(call BOOT_SECTION_LD_FLAG, .apitable_signatures,  BootloaderAPI_Signatures,  8)
 
 # Default target
-default: chip-reset avrdude
+default: size chip-reset avrdude
 
 build: $(TARGET).hex
 
