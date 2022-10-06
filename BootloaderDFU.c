@@ -106,69 +106,20 @@ uint16_t MagicBootKey ATTR_NO_INIT;
  */
 void Application_Jump_Check(void)
 {
-	bool JumpToApplication = false;
+	// Turn off the watchdog
+	MCUSR &= ~(1 << WDRF);
+	wdt_disable();
 
-	#if (BOARD == BOARD_LEONARDO)
-		/* Enable pull-up on the IO13 pin so we can use it to select the mode */
-		PORTC |= (1 << 7);
-		Delay_MS(10);
+	// If no valid program, run bootloader
+	if (pgm_read_word_near(0) == 0xFFFF) return;
 
-		/* If IO13 is not jumpered to ground, start the user application instead */
-		JumpToApplication = ((PINC & (1 << 7)) != 0);
+	// If Power On flag set or Brown Out Reset flag set, clear them and run application
+	const unsigned char flags = (1 << PORF) | (1 << BORF);
+	if (MCUSR & flags) {
 
-		/* Disable pull-up after the check has completed */
-		PORTC &= ~(1 << 7);
-	#elif ((BOARD == BOARD_XPLAIN) || (BOARD == BOARD_XPLAIN_REV1))
-		/* Disable JTAG debugging */
-		JTAG_DISABLE();
-
-		/* Enable pull-up on the JTAG TCK pin so we can use it to select the mode */
-		PORTF |= (1 << 4);
-		Delay_MS(10);
-
-		/* If the TCK pin is not jumpered to ground, start the user application instead */
-		JumpToApplication = ((PINF & (1 << 4)) != 0);
-
-		/* Re-enable JTAG debugging */
-		JTAG_ENABLE();
-	#else
-		/* Check if the device's BOOTRST fuse is set */
-		if (true || !(BootloaderAPI_ReadFuse(GET_HIGH_FUSE_BITS) & ~FUSE_BOOTRST))
-		{
-			/* If the reset source was not an external reset or the key is correct, clear it and jump to the application */
-			if (MagicBootKey == MAGIC_BOOT_KEY)
-			  JumpToApplication = true;
-
-			/* Clear reset source */
-			MCUSR &= ~(1 << EXTRF);
-		}
-		else
-		{
-			/* If the reset source was the bootloader and the key is correct, clear it and jump to the application;
-			 * this can happen in the HWBE fuse is set, and the HBE pin is low during the watchdog reset */
-			if ((MCUSR & (1 << WDRF)) && (MagicBootKey == MAGIC_BOOT_KEY))
-				JumpToApplication = true;
-
-			/* Clear reset source */
-			MCUSR &= ~(1 << WDRF);
-		}
-	#endif
-
-	/* Don't run the user application if the reset vector is blank (no app loaded) */
-	bool ApplicationValid = (pgm_read_word_near(0) != 0xFFFF);
-
-	/* If a request has been made to jump to the user application, honor it */
-	if (JumpToApplication && ApplicationValid)
-	{
-		/* Turn off the watchdog */
-		MCUSR &= ~(1 << WDRF);
-		wdt_disable();
-
-		/* Clear the boot key and jump to the user application */
-		MagicBootKey = 0;
-
-		// cppcheck-suppress constStatement
-		((void (*)(void))0x0000)();
+		// MCUSR is special. Low bits clear, high bits have no effect
+		MCUSR = ~flags;
+		asm volatile("jmp 0");
 	}
 }
 
