@@ -1,0 +1,1 @@
+// Generated file. Fill with: `make set type=${text}`

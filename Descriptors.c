@@ -133,6 +133,13 @@ const USB_Descriptor_String_t ManufacturerString = USB_STRING_DESCRIPTOR(L"LUFA 
  */
 const USB_Descriptor_String_t ProductString = USB_STRING_DESCRIPTOR(L"LUFA DFU");
 
+#include "TypeString.h"
+#ifdef TYPE_STRING
+#define L_EXPAND(x) L## #x
+#define MAKE_L_STRING(x) L_EXPAND(x)
+const USB_Descriptor_String_t TypeString = USB_STRING_DESCRIPTOR(MAKE_L_STRING(TYPE_STRING));
+#endif
+
 /** This function is called by the library when in device mode, and must be overridden (see library "USB Descriptors"
  *  documentation) by the application code so that the address and size of a requested descriptor can be given
  *  to the USB library. When the device receives a Get Descriptor request on the control endpoint, this function
@@ -175,6 +182,15 @@ uint16_t CALLBACK_USB_GetDescriptor(const uint16_t wValue,
 				Address = &ProductString;
 				Size    = ProductString.Header.Size;
 			}
+
+
+			#ifdef TYPE_STRING
+			else if (DescriptorNumber == STRING_ID_Type)
+			{
+				Address = &TypeString;
+				Size    = TypeString.Header.Size;
+			}
+			#endif
 
 			break;
 	}

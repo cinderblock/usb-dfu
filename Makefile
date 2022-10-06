@@ -78,6 +78,10 @@ bootloader-assembly: obj/BootloaderDFU.s
 obj/BootloaderDFU.s: BootloaderDFU.c
 	"C:\Program Files\avr-gcc\avr8-gnu-toolchain-win32_x86\bin/"avr-gcc -S -pipe -gdwarf-2 -g2 -mmcu=atmega32u4 -fshort-enums -fno-inline-small-functions -Wall -fno-strict-aliasing -funsigned-char -funsigned-bitfields -ffunction-sections -I. -DARCH=ARCH_AVR8 -DF_CPU=16000000UL -mrelax -fno-jump-tables -x c -Os -std=gnu11 -Wstrict-prototypes -Wfatal-errors -DUSE_LUFA_CONFIG_HEADER -UAVR -IConfig -IAVR++ -DBOOT_START_ADDR=0x7000 -I. -ILUFA/LUFA/.. -DARCH=ARCH_AVR8 -DBOARD=BOARD_BOARD_USER -DF_USB=16000000UL BootloaderDFU.c -o obj/BootloaderDFU.s
 
+set:
+	@echo "Setting TYPE_STRING to: $(type)"
+	@echo '#define TYPE_STRING "$(type)"' > TypeString.h
+
 # Include LUFA-specific DMBS extension modules
 DMBS_LUFA_PATH ?= $(LUFA_PATH)/Build/LUFA
 include $(DMBS_LUFA_PATH)/lufa-sources.mk
