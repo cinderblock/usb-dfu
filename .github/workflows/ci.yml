@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [QuantumController]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build bootloader
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Install AVR toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends gcc-avr binutils-avr avr-libc make
+
+      - name: Toolchain version
+        run: avr-gcc --version
+
+      # `make all` compiles and links BootloaderDFU.hex. The linker places the API table
+      # at fixed addresses at the top of flash, so a bootloader that outgrows its 4 KB
+      # section fails here as an overlap rather than slipping through.
+      - name: Build
+        run: make all
